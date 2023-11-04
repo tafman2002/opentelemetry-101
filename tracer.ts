@@ -10,6 +10,7 @@ import { OurSampler } from './ourSampler';
 import {W3CBaggagePropagator, W3CTraceContextPropagator, CompositePropagator} from '@opentelemetry/core'
 import { OTLPMetricExporter} from '@opentelemetry/exporter-metrics-otlp-proto'
 
+// Receives the name of the service to initalize all of the instrumentation
 function start(serviceName: string) {
 
     const { endpoint, port } = PrometheusExporter.DEFAULT_OPTIONS;
@@ -18,6 +19,7 @@ function start(serviceName: string) {
     //         `prometheus scrape endpoint: http://localhost:${port}${endpoint}`,
     //     );
     // });
+    // MeterProvider provides metrics and the meter will be returned to the application for use.
     const meterProvider = new MeterProvider({
         resource: new Resource({
             [SemanticResourceAttributes.SERVICE_NAME]: serviceName,
